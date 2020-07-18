@@ -1,0 +1,58 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<script type="text/javascript" src='{% static "js/home.js" %}'></script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+            <h1>
+                Shore2rl
+            </h1>
+            <label for="hiddendiv">The Self-Hostable URL Shortener</label>
+            <br>
+            <div id="hiddendiv" hidden></div>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" style="text-align: center;"></div>
+        <div class="col-md-6" style="text-align: center;">
+            <form method="POST" action="/shorten/" onsubmit="return verify_input()">
+                {% csrf_token %}
+                <div class="form-group">
+                {% if short_url is None %}
+                <input type="url" name="url" class="form-control" id="url_input" placeholder="Enter URL">
+                {% else %}
+                <input type="url" name="url" class="form-control" id="url_input" value="{{short_url}}">
+                <script>
+                const input = document.getElementById('url_input');
+                input.focus();
+                input.select();
+                </script>
+                {% endif %}
+                  <p class="text-danger" id="warningtext"></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-3" style="text-align: center;"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+            <a style="font-size: larger;" href="/view/">
+                <button class="btn btn-secondary">
+                    View all links
+                </button>
+            </a>
+            <br>
+        </div>
+    </div>
+</div>
+
+   
+{% endblock %}

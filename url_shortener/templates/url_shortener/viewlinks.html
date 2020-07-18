@@ -1,0 +1,30 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <br>
+<table class = "table">
+    <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Original URL</th>
+          <th scope="col">New URL</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for item in links %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td><a href="{{item.original_url}}">{{item.original_url}}</a></td>
+            <td>{{item.new_url}}</td>
+
+        </tr>
+
+    
+    {% endfor %}
+</tbody>
+</table>
+</div>
+
+{% endblock %}
